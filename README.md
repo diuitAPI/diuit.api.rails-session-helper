@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 # Diuitauth
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/diuitauth`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A simple Ruby gem library for helping you to get Diuit API session easier.
 
 ## Installation
 
@@ -23,18 +20,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'diuitauth'
 
-## Development
+# Can user file reader
+private_key = "-----BEGIN RSA PRIVATE KEY-----
+  -----END RSA PRIVATE KEY-----"
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+exp = Time.now.utc.to_i + 4 * 3600
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+client = {
+  :app_id => "Your appId",
+  :app_key => "Your appKey",
+  :key_id => "Your appKeyId",
+  :private_key => "#{private_key}",
+  :exp => "#{exp}",
+  :platform => "ios_sandbox", # ['gcm', 'ios_sandbox', 'ios_production']
+  :user_serial => "Your user serial",
+  :device_id => "Your device id"
+}
 
-## Contributing
+return Diuitauth::Login.get_session_token client.to_json
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/diuitauth.
+###  More
 
-=======
-# diuit.api.rails-session-helper
->>>>>>> c5f2d035a3dcdb51843206360b394a5699ae72db
+Please refer [Diuit Messaging API](http://api2.diuit.com/).
